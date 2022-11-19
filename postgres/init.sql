@@ -9,6 +9,15 @@ CREATE TABLE IF NOT EXISTS public.ticket
         CHECK (status IN ('PAID', 'CANCELED'))
 );
 
+
+CREATE TABLE IF NOT EXISTS public.airport
+(
+    id      SERIAL PRIMARY KEY,
+    name    VARCHAR(255),
+    city    VARCHAR(255),
+    country VARCHAR(255)
+);
+
 CREATE TABLE IF NOT EXISTS public.flight
 (
     id              SERIAL PRIMARY KEY,
@@ -17,14 +26,6 @@ CREATE TABLE IF NOT EXISTS public.flight
     from_airport_id INT REFERENCES airport (id),
     to_airport_id   INT REFERENCES airport (id),
     price           INT                      NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS public.airport
-(
-    id      SERIAL PRIMARY KEY,
-    name    VARCHAR(255),
-    city    VARCHAR(255),
-    country VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS public.privilege
@@ -46,4 +47,3 @@ CREATE TABLE IF NOT EXISTS public.privilege_history
     operation_type VARCHAR(20) NOT NULL
         CHECK (operation_type IN ('FILL_IN_BALANCE', 'DEBIT_THE_ACCOUNT'))
 );
-
