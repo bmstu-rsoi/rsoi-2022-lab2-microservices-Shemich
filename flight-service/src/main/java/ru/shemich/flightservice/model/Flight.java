@@ -22,18 +22,17 @@ public class Flight {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id")
-    Integer id;
+    Long id;
     @Column(name = "flight_number", length = 20)
     String flightNumber;
     @Column(name = "datetime")
     @DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
     Date datetime;
     @Column(name = "from_airport_id")
-    Integer fromAirportId;
+    Long fromAirportId;
     @Column(name = "to_airport_id")
-    Integer toAirportId;
+    Long toAirportId;
     @Column(name = "price")
-    Integer price;
-
+    Long price;
 }
 

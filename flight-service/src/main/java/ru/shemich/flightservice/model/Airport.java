@@ -20,12 +20,18 @@ public class Airport {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id")
-    Integer id;
+    Long id;
     @Column(name = "name")
     String name;
     @Column(name = "city")
     String city;
     @Column(name = "country")
     String country;
+
+    public String toCityAndName() {
+        return city + " " + name;
+    }
+
 }
+
 
