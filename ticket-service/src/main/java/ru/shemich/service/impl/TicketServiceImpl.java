@@ -1,6 +1,9 @@
 package ru.shemich.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.shemich.api.request.TicketPurchaseRequest;
+import ru.shemich.api.response.TicketResponse;
+import ru.shemich.api.response.enums.TicketStatus;
 import ru.shemich.model.Ticket;
 import ru.shemich.repository.TicketRepository;
 import ru.shemich.service.TicketService;
@@ -25,4 +28,29 @@ public class TicketServiceImpl implements TicketService {
     public Ticket getByUidAndUsername(UUID ticketUid, String username) {
         return ticketRepository.findByTicketUidAndUsername(ticketUid, username);
     }
+
+    @Override
+    public Ticket create(String username, TicketPurchaseRequest request) {
+        Ticket ticket = new Ticket();
+        ticket.setTicketUid(UUID.randomUUID());
+        ticket.setFlightNumber(request.getFlightNumber());
+        ticket.setPrice(Long.valueOf(request.getPrice()));
+        ticket.setUsername(username);
+        ticket.setStatus(String.valueOf(TicketStatus.PAID));
+        ticketRepository.save(ticket);
+        return ticket;
+    }
+
+    @Override
+    public TicketResponse toTicketResponse(Ticket ticket) {
+        return null;
+    }
+
+//    @Override
+//    public TicketResponse toTicketResponse(Ticket ticket) {
+//        return new TicketResponse(
+//                ticket.getTicketUid().toString(),
+//                ticket.getFlightNumber()
+//        );
+//    }
 }

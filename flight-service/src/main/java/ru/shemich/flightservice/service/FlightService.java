@@ -12,4 +12,9 @@ public interface FlightService {
     Page<Flight> findPaginated(int page, int size);
 
     List<FlightResponse> make(List<Flight> pageFlights);
+
+    boolean isExistByFlightNumber(String flightNumber);
+    Flight getByFlightNumber(String flightNumber);
+
+    FlightResponse toFlightResponse(Flight flight);
 }

@@ -7,4 +7,5 @@ import ru.shemich.flightservice.model.Flight;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
     Page<Flight>  findAll(Pageable pageable);
+    Flight findByFlightNumber(String flightNumber);
 }

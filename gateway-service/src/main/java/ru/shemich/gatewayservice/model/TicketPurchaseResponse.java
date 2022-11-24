@@ -1,12 +1,9 @@
-package ru.shemich.api.response;
+package ru.shemich.gatewayservice.model;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import org.springframework.format.annotation.DateTimeFormat;
-import ru.shemich.api.response.enums.TicketStatus;
-
-import java.util.Date;
+import ru.shemich.gatewayservice.model.enums.TicketStatus;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -15,8 +12,7 @@ public class TicketPurchaseResponse {
     String flightNumber;
     String fromAirport;
     String toAirport;
-    @DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
-    Date date;
+    String date;
     Integer price;
     Integer paidByMoney;
     Integer paidByBonuses;

@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.shemich.api.request.TicketPurchaseRequest;
+import ru.shemich.api.response.TicketPurchaseResponse;
+import ru.shemich.api.response.TicketResponse;
 import ru.shemich.model.Ticket;
 import ru.shemich.service.TicketService;
 
@@ -16,6 +19,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(path = "/api/v1/tickets", produces = APPLICATION_JSON_VALUE)
 public class TicketController {
+    private final String headerUsername = "X-User-Name";
 
     private final TicketService ticketService;
 
@@ -24,31 +28,27 @@ public class TicketController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Ticket>> getAll(@RequestHeader (name = "X-User-Name") String username) {
+    public ResponseEntity<List<Ticket>> getAll(@RequestHeader (headerUsername) String username) {
         List<Ticket> tickets = ticketService.getAllByUsername(username);
         log.info("Fetching all tickets by {}", username);
         return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
 
     @GetMapping("/{ticketUid}")
-    public ResponseEntity<Ticket> getByUid(@RequestParam ("ticketUid") UUID ticketUid, @RequestHeader (name = "X-User-Name") String username) {
-        Ticket ticket = ticketService.getByUidAndUsername(ticketUid, username);
+    public Ticket getByUidAndUsername(
+            @PathVariable ("ticketUid") UUID ticketUid,
+            @RequestHeader (headerUsername) String username
+    ) {
         log.info("Fetching ticket with id={} by {}", ticketUid, username);
-        return new ResponseEntity<>(ticket, HttpStatus.OK);
+        return ticketService.getByUidAndUsername(ticketUid, username);
     }
 
     @PostMapping()
-    public ResponseEntity<Ticket> create(@RequestHeader (name = "X-User-Name") String username) {
-        Ticket ticket = ticketService.create(username);
-        log.info("Creating ticket with id={} by user={}", ticket.getTicketUid(), username);
-        return new ResponseEntity<>(ticket, HttpStatus.OK);
+    public Ticket create(@RequestHeader (headerUsername) String username,
+                                         @RequestBody TicketPurchaseRequest request) {
+        log.info("Creating ticket for user: {} by {}", username, request);
+        return ticketService.create(username, request);
     }
 
-    @DeleteMapping()
-    public ResponseEntity<Ticket> refund(@RequestParam ("ticketUid") UUID ticketUid, @RequestHeader (name = "X-User-Name") String username) {
-        Ticket ticket = ticketService.refund(ticketUid, username);
-        log.info("Deleting ticket with id={} by user={}", ticket.getTicketUid(), username);
-        return new ResponseEntity<>(ticket, HttpStatus.OK);
-    }
 
 }

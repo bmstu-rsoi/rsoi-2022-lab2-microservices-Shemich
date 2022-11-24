@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import java.util.UUID;
 
+import static javax.persistence.GenerationType.AUTO;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -28,7 +29,7 @@ public class Ticket {
     @Column(name = "username", length = 80)
     String username;
     @Column(name = "flight_number", length = 20)
-    Long flightNumber;
+    String flightNumber;
     @Column(name = "price")
     Long price;
     @Column(name = "status")
