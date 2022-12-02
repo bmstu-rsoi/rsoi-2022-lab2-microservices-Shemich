@@ -1,11 +1,10 @@
-package ru.shemich.bonusservice.api.response;
+package ru.shemich.gatewayservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.shemich.bonusservice.api.response.enums.OperationType;
 
 import java.util.Date;
 

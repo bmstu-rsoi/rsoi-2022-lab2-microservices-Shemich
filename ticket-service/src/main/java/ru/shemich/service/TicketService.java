@@ -16,5 +16,5 @@ public interface TicketService {
 
     Ticket create(String username, TicketPurchaseRequest request);
 
-    TicketResponse toTicketResponse(Ticket ticket);
+    Ticket refundTicket(Ticket ticket);
 }

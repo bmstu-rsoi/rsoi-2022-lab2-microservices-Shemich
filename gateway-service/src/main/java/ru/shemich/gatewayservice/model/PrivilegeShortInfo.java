@@ -8,6 +8,6 @@ import ru.shemich.gatewayservice.model.enums.PrivilegeStatus;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PrivilegeShortInfo {
-    String balance;
+    Integer balance;
     PrivilegeStatus status;
 }

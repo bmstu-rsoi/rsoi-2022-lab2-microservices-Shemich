@@ -7,9 +7,10 @@ import ru.shemich.flightservice.model.Flight;
 import java.util.List;
 
 public interface FlightService {
-    Page<Flight> getAll(int page, int size);
+    Page<Flight> getAllToPage(int page, int size);
 
     Page<Flight> findPaginated(int page, int size);
+    List<Flight> getAll();
 
     List<FlightResponse> make(List<Flight> pageFlights);
 

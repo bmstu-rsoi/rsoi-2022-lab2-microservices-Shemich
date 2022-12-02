@@ -28,9 +28,13 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Page<Flight> getAll(int page, int size) {
+    public Page<Flight> getAllToPage(int page, int size) {
         Pageable paging = PageRequest.of(--page, size);  //  -- to start from page 1 not 0
         return flightRepository.findAll(paging);
+    }
+    @Override
+    public List<Flight> getAll() {
+        return flightRepository.findAll();
     }
 
     @Override
@@ -40,7 +44,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<FlightResponse> make(List<Flight> pageFlights) {
-        List<FlightResponse> items = pageFlights.stream()
+        return pageFlights.stream()
                 .map(flight -> new FlightResponse(
                         flight.getFlightNumber(),
                         airportRepository.findById(flight.getFromAirportId()).get().toCityAndName(),
@@ -48,7 +52,6 @@ public class FlightServiceImpl implements FlightService {
                         flight.getDatetime(),
                         flight.getPrice()))
                 .collect(Collectors.toList());
-        return items;
     }
 
     @Override

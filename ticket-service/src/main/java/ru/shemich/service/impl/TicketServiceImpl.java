@@ -2,7 +2,6 @@ package ru.shemich.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.shemich.api.request.TicketPurchaseRequest;
-import ru.shemich.api.response.TicketResponse;
 import ru.shemich.api.response.enums.TicketStatus;
 import ru.shemich.model.Ticket;
 import ru.shemich.repository.TicketRepository;
@@ -42,15 +41,10 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketResponse toTicketResponse(Ticket ticket) {
-        return null;
+    public Ticket refundTicket(Ticket ticket) {
+        ticket.setStatus(String.valueOf(TicketStatus.CANCELED));
+        ticketRepository.save(ticket);
+        return ticket;
     }
 
-//    @Override
-//    public TicketResponse toTicketResponse(Ticket ticket) {
-//        return new TicketResponse(
-//                ticket.getTicketUid().toString(),
-//                ticket.getFlightNumber()
-//        );
-//    }
 }

@@ -1,24 +1,22 @@
 package ru.shemich.bonusservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.shemich.bonusservice.api.response.enums.Operation;
+import ru.shemich.bonusservice.api.response.enums.OperationType;
 
 import javax.persistence.*;
-
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
+
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
 @Table(name = "privilege_history")
 public class PrivilegeHistory {
@@ -36,8 +34,7 @@ public class PrivilegeHistory {
     @Column(name = "balance_diff")
     Integer balanceDiff;
     @Column(name = "operation_type")
-    Operation operationType;
-
+    String operationType;
 }
 
 
