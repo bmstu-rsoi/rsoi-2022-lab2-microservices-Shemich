@@ -13,8 +13,39 @@ services:
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
+  
+  ticket:
+    build:
+      context: ticket-service
+    depends_on:
+      - postgres
+    ports:
+      - "8070:8070"  
 
-# TODO добавить сервисы
-
+  flight:
+    build:
+      context: flight-service
+    depends_on:
+      - postgres
+    ports:
+      - "8060:8060"
+  
+  bonus:
+    build:
+      context: bonus-service
+    depends_on:
+      - postgres
+    ports:
+      - "8050:8050"
+  gateway:
+    build:
+      context: gateway-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ticket
+      - flight
+      - bonus
+        
 volumes:
   db-data:
