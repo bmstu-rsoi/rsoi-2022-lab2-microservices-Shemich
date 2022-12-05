@@ -11,6 +11,7 @@ import ru.shemich.gatewayservice.model.*;
 import ru.shemich.gatewayservice.service.GatewayService;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -20,14 +21,15 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/api/v1", produces = "application/json")
 public class GatewayController {
 
-    private final String bonusServiceUrl = "http://localhost:8050/api/v1";
-    private final String flightServiceUrl = "http://localhost:8060/api/v1";
-    private final String ticketServiceUrl = "http://localhost:8070/api/v1";
+    private final String bonusServiceUrl = "http://bonus:8050/api/v1";
+    private final String flightServiceUrl = "http://flight:8060/api/v1";
+    private final String ticketServiceUrl = "http://ticket:8070/api/v1";
     private final String headerUsername = "X-User-Name";
 
     private final GatewayService gatewayService;
 
     private WebClient clientFlight;
+
     private WebClient clientTicket;
     private WebClient clientBonus;
 
