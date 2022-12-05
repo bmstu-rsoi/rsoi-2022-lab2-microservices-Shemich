@@ -51,7 +51,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: cd gateway-service && chmod +x gradlew
       - name: Build with Gradle
-        run: cd Gateway && ./gradlew build
+        run: cd gateway-service && ./gradlew build
 
       - name: Build images
         timeout-minutes: 10
