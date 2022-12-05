@@ -4,8 +4,6 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
-group = 'ru.shemich'
-
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
