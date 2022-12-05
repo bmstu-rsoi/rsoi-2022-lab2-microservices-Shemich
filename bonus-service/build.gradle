@@ -5,7 +5,6 @@ plugins {
 }
 
 group = 'ru.shemich'
-sourceCompatibility = '17'
 
 configurations {
 	compileOnly {
